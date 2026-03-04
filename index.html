@@ -3,134 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Bunny</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
+    <title> My Love ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #ffd6e7, #ffb3d9);
-            overflow: hidden;
-            font-family: 'Pacifico', cursive;
+        :root {
+            --primary-pink: #ffb7b7;
+            --dark-pink: #d63384;
+            --bg-color: #fdf2f2;
+            --text-color: #333;
         }
 
-        .heart-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .heart-shape {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: #fff0f6;
-            transform: rotate(-45deg);
-            box-shadow: 0 10px 30px rgba(255, 0, 120, 0.2);
-            z-index: 1;
-        }
-
-        .heart-shape::before,
-        .heart-shape::after {
-            content: "";
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: #fff0f6;
-            border-radius: 50%;
-        }
-
-        .heart-shape::before { top: -100px; left: 0; }
-        .heart-shape::after { left: 100px; top: 0; }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
+        body { 
+            font-family: 'Quicksand', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            margin: 0; 
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevents scrollbars from hearts */
+        }
+        
+        header { padding: 50px 20px 10px; text-align: center; }
+
+        h1 { 
+            font-family: 'Dancing Script', cursive; 
+            color: var(--dark-pink);
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         }
 
-        /* 🖼️ تعديل استايل الصورة */
-        .bunny-img {
-            width: 120px; /* تقدري تغيري الحجم من هنا */
-            height: 120px;
-            object-fit: contain; /* عشان الصورة متتمطش */
-            cursor: pointer;
-            user-select: none;
-            animation: float 3s ease-in-out infinite;
+        /* Navigation Buttons */
+        nav { 
+            display: flex; 
+            gap: 12px; 
+            margin: 30px 0;
+            z-index: 10; /* Keep buttons above hearts */
+        }
+        
+        nav button { 
+            background: white; 
+            border: 2px solid var(--primary-pink); 
+            color: var(--dark-pink);
+            padding: 12px 25px; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            font-weight: 700;
+            transition: 0.3s;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        nav button.active { 
+            background: var(--dark-pink); 
+            color: white; 
+            border-color: var(--dark-pink);
         }
 
-        .love-text {
-            margin-top: 15px;
-            font-size: 28px;
-            color: #ff0077;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Sections */
+        .content-section { 
+            display: none; 
+            width: 90%; 
+            max-width: 700px; 
+            animation: fadeIn 0.6s ease-out;
+            text-align: center;
+            z-index: 5;
         }
 
-        .love-text.show {
-            opacity: 1;
-            transform: scale(1);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .kiss {
+        /* Letter Styling */
+        .letter-box { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            font-family: 'Lora', serif;
+            font-size: 1.25rem; 
+            line-height: 1.8; 
+            text-align: left;
+            border-top: 8px solid var(--primary-pink);
+        }
+
+        .signature {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--dark-pink);
+            margin-top: 20px;
+        }
+
+        /* Heart Animation Style */
+        .heart-particle {
             position: fixed;
-            font-size: 35px;
+            color: #ff4d4d;
+            font-size: 20px;
             pointer-events: none;
-            z-index: 10;
-            animation: kissMove 1.2s ease-out forwards;
+            user-select: none;
+            animation: floatUp 2s linear forwards;
+            z-index: 9999;
         }
 
-        @keyframes kissMove {
-            0% { opacity: 1; transform: scale(0.5) translateY(0); }
-            100% { opacity: 0; transform: scale(2) translateY(-100px) rotate(20deg); }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(0); opacity: 0; }
         }
+
+        /* Gallery & Audio */
+        .music-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        audio { width: 100%; margin-top: 15px; }
+        .gallery img { width: 100%; border-radius: 15px; margin-bottom: 20px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        footer { padding: 40px; color: #a1a1a1; font-size: 0.8rem; }
     </style>
 </head>
-<body>
+<body onmousemove="createHeart(event)">
 
-<div class="heart-container">
-    <div class="heart-shape"></div>
-    <div class="content">
-        <img src="blowing-kiss.png" alt="Bunny" class="bunny-img" id="bunny">
-        
-        <div class="love-text" id="loveText">I Love You 💕</div>
+<header>
+    <h1>To My Forever...</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('letter')" id="btn-letter">The Letter</button>
+    <button onclick="showSection('music')" id="btn-music">Our Song</button>
+    <button onclick="showSection('photos')" id="btn-photos">Gallery</button>
+</nav>
+
+<section id="letter" class="content-section">
+    <div class="letter-box">
+        <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink);">hamody❤️❤️</h2>
+        <p>
+            I made this space to remind you of how much you mean to me. 
+            Sometimes words aren't enough, but I'll try anyway 💋💋💋
+        </p>
+        <p>
+             enta wahshny moot ❤️  
+		   kol osbo3een tlata bashofak haga bgad mdy2any bas 3arfa eno ghsb 
+		   3nna w el zrof hya ely msh zabta 
+        </p>
+        <div class="signature">Your wife  <br> joj</div>
     </div>
-</div>
+</section>
+
+      
+            <section id="music" class="content-section">
+    <div class="music-card">
+        <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink);">🎵 Our Soundtrack</h2>
+        <p>This song reminds me of us </p>
+        
+        <audio controls id="mainAudio">
+            <source src="https://files.catbox.moe/bzihnn.mp3" type="audio/mpeg">
+            Your browser doesn't support audio.
+        </audio>
+    </div>
+</section>
+
+<section id="photos" class="content-section">
+    <div class="gallery">
+        <img src="photo1.jpg" alt="Us">
+        <img src="photo2.jpg" alt="Us">
+        <img src="photo3.jpg" alt="Us">
+    </div>
+</section>
+
+<footer>I love you  | Mwah💋</footer>
 
 <script>
-    const bunny = document.getElementById("bunny");
-    const loveText = document.getElementById("loveText");
+    // 1. Navigation Logic
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+        document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('btn-' + id).classList.add('active');
+    }
 
-    bunny.addEventListener("click", function(e) {
-        loveText.classList.add("show");
+    // 2. Heart Trail Logic
+    function createHeart(e) {
+        // Only create a heart every few movements to avoid clutter
+        if (Math.random() > 0.1) return; 
 
-        const kiss = document.createElement("div");
-        kiss.className = "kiss";
-        kiss.innerText = "💋";
+        const heart = document.createElement('span');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart-particle');
         
-        // تحديد مكان البوسة فوق الصورة
-        kiss.style.left = (e.clientX - 20) + "px";
-        kiss.style.top = (e.clientY - 40) + "px";
+        // Randomize position slightly around the cursor
+        const x = e.clientX;
+        const y = e.clientY;
+        heart.style.left = (x + (Math.random() * 20 - 10)) + 'px';
+        heart.style.top = (y + (Math.random() * 20 - 10)) + 'px';
+        
+        // Randomize size
+        heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
 
-        document.body.appendChild(kiss);
-        setTimeout(() => kiss.remove(), 1200);
-    });
+        document.body.appendChild(heart);
+
+        // Remove heart after animation
+        setTimeout(() => { heart.remove(); }, 2000);
+    }
+
+    // Default start
+    window.onload = () => showSection('letter');
 </script>
 
 </body>
