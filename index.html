@@ -52,10 +52,22 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .gallery-item img {
-            width: 100%;
-            display: block;
-            transition: transform 0.3s;
+       .video-card {
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border: 5px solid white;
+    }
+    .video-container {
+        border-radius: 15px;
+        overflow: hidden;
+        line-height: 0;
+    }
+    video {
+        border-radius: 10px;
+        display: block;
+    }
         }
 
         /* The Kiss Emoji Styling */
@@ -117,21 +129,21 @@
         </audio>
 
 <section id="photos" class="content-section">
-    <div class="gallery">
-        <div class="gallery-item" ondblclick="giveKiss(this)">
-            <img src="https://jojoqaoud.github.io/biggggkissss/photo1.jpg" alt="Us" onerror="this.src='https://via.placeholder.com/300?text=Photo+Not+Found'">
-            <div class="kiss-emoji">💋</div>
+    <div class="video-card">
+        <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink); font-size: 2.5rem;">📽️ Our Story</h2>
+        
+        <div class="video-container">
+            <video id="myVideo" controls width="100%" poster="photo1.jpg">
+                <source src="ourvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
-        <div class="gallery-item" ondblclick="giveKiss(this)">
-            <img src="https://jojoqaoud.github.io/biggggkissss/photo2.jpg" alt="Us" onerror="this.src='https://via.placeholder.com/300?text=Photo+Not+Found'">
-            <div class="kiss-emoji">💋</div>
-        </div>
-        <div class="gallery-item" ondblclick="giveKiss(this)">
-            <img src="https://jojoqaoud.github.io/biggggkissss/photo3.jpg" alt="Us" onerror="this.src='https://via.placeholder.com/300?text=Photo+Not+Found'">
-            <div class="kiss-emoji">💋</div>
-        </div>
+        
+        <p style="margin-top: 15px; font-style: italic;">A moment I'll never forget...</p>
     </div>
 </section>
+
+
 <footer>I love you  | Mwah💋</footer>
 <script>
     function showSection(id) {
@@ -167,6 +179,7 @@
 
 </body>
 </html>
+
 
 
 
