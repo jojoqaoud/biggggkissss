@@ -61,14 +61,89 @@
     </div>
 </section>
 
-<section id="photos" class="content-section">
-    <div class="video-card">
-        <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink);"><p>they aren't just here...</p> <p>they are in my heart❤️❤️</p>  </h2>
-        <video controls>
-            <source src="https://videotourl.com/videos/1772827034605-fdb7416b-5e3e-4e52-8093-c56e585ed3ba.mp4" type="video/mp4">
-        </video>
+<section id="photos" class="content-section" style="display: block;">
+    <div class="stack-container" id="cardStack">
+        <div class="stack-card" ondblclick="swipeCard()">
+           
+        <div class="stack-card" ondblclick="swipeCard()">
+            <img src="foto4.jpg" alt="Memory 1">
+            <div class="card-label">Me and My Soul ❤️</div>
+        </div>
+		 <video controls>
+                <source src="vid3.mp4" type="video/mp4">
+            </video>
+            <div class="card-label">My Sexy Husband 🫦</div>
+        </div>
+
+        <div class="stack-card" ondblclick="swipeCard()">
+            <img src="foto1.jpg" alt="Memory 2">
+            <div class="card-label">ALways Spoils me  🌹</div>
+        </div>
+	 <video controls>
+                <source src="vid3.mp4" type="video/mp4">
+            </video>
+            <div class="card-label"> everytime I look at you I get fascinated🤭</div>
+        </div>
+		
+        <div class="stack-card" ondblclick="swipeCard()">
+            <img src="foto5.jpg" alt="Memory 2">
+            <div class="card-label">Obviously! he is my best friend </div>
+		 <video controls>
+                <source src="vid2.mp4" type="video/mp4">
+            </video>
+            <div class="card-label">My Man ❤️ </div>
+        </div>
+
     </div>
+    <p style="color: #888; font-size: 0.9rem;">Double Click to Swipe! 😉</p>
 </section>
+
+
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + id).classList.add('active');
+    }
+
+    function swipeCard() {
+        const stack = document.getElementById('cardStack');
+        const cards = stack.children;
+        if (cards.length < 2) return;
+
+        const topCard = cards[0];
+
+        // 1. زحلقة الكارت للجنب
+        topCard.classList.add('swiping-left');
+
+        setTimeout(() => {
+            // 2. نقله لآخر الرصة وتصفير حركته
+            topCard.classList.remove('swiping-left');
+            stack.appendChild(topCard);
+
+            // 3. إعادة ترتيب الكروت الباقية بنعومة
+            Array.from(cards).forEach((card, index) => {
+                card.style.transition = "all 0.6s ease";
+                if (index === 0) {
+                    card.style.zIndex = "3";
+                    card.style.transform = "scale(1) translateY(0)";
+                    card.style.opacity = "1";
+                    card.querySelector('video, img').style.pointerEvents = "auto";
+                } else if (index === 1) {
+                    card.style.zIndex = "2";
+                    card.style.transform = "scale(0.95) translateY(15px)";
+                    card.style.opacity = "0.9";
+                } else {
+                    card.style.zIndex = "1";
+                    card.style.transform = "scale(0.9) translateY(30px)";
+                    card.style.opacity = "0.8";
+                }
+            });
+        }, 500);
+    }
+</script>
 
 <footer>I love you | Mwah 💋</footer>
 
